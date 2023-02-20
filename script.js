@@ -53,10 +53,37 @@ console.log(typeof(answers));*/
 4) Потренироваться и переписать цикл еще двумя способами*/
 
 
+
+
+
+/* Задание на урок:
+
+1) Первую часть задания повторить по уроку
+
+2) Создать функцию showMyDB, которая будет проверять свойство privat. Если стоит в позиции
+false - выводит в консоль главный объект программы
+
+3) Создать функцию writeYourGenres в которой пользователь будет 3 раза отвечать на вопрос 
+"Ваш любимый жанр под номером ${номер по порядку}". Каждый ответ записывается в массив данных
+genres
+
+P.S. Функции вызывать не обязательно*/
+
 'use strict';
-//1
-const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
-//2
+
+let numberOfFilms;
+
+function start() {
+    numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+
+    while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
+        numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+    }
+}
+
+start();
+
+
 let personalMovieDB = {
     count: numberOfFilms,
     movies: {},
@@ -66,31 +93,53 @@ let personalMovieDB = {
 };
 
 
-
-for (let i = 0; i < 2; i++){
-    let a = prompt('Один из последних просмотренных фильмов?');
-    let b = prompt('На сколько оцените его?');
-    if (a != null && a.length < 50 && a!= "" && b != null && b.length < 50 && b != ""){
-        personalMovieDB.movies[a] = b; //Когда пишем свойства в объекте используем []
-    } else {
-        i--;
+function rememberMyFilms() {
+    for (let i = 0; i < 2; i++){
+        let a = prompt('Один из последних просмотренных фильмов?');
+        let b = prompt('На сколько оцените его?');
+        if (a != null && a.length < 50 && a!= "" && b != null && b.length < 50 && b != ""){
+            personalMovieDB.movies[a] = b; //Когда пишем свойства в объекте используем []
+        } else {
+            i--;
+        }    
     }
-    
 }
 
+rememberMyFilms();
 
-// При помощи условий проверить  personalMovieDB.count, и если он меньше 10 - вывести сообщение
-// "Просмотрено довольно мало фильмов", если от 10 до 30 - "Вы классический зритель", а если больше - 
-// "Вы киноман". А если не подошло ни к одному варианту - "Произошла ошибка"
-
-if (personalMovieDB.count < 10){
-    alert('Просмотрено довольно мало фильмов');
-}else if (personalMovieDB.count < 30){
-    alert('Вы классический зритель');
-}else if (personalMovieDB.count >= 30){
-    alert('Вы киноман');
-}else {
-    alert('Произошла ошибка');
+function writeYourGenres () {
+    for (let i = 1; i <= 3; i++){
+        let genre = prompt(`Ваш любимый жанр под номером ${i}`);
+        personalMovieDB.genres.push(genre);
+    }
 }
-console.log(personalMovieDB);
+writeYourGenres();
 
+function detectPersonalLevel () {
+    if (personalMovieDB.count < 10){
+        alert('Просмотрено довольно мало фильмов');
+    }else if (personalMovieDB.count < 30){
+        alert('Вы классический зритель');
+    }else if (personalMovieDB.count >= 30){
+        alert('Вы киноман');
+    }else {
+        alert('Произошла ошибка');
+    }    
+}
+
+detectPersonalLevel ();
+
+
+
+/*Создать функцию writeYourGenres в которой пользователь будет 3 раза отвечать на вопрос 
+"Ваш любимый жанр под номером ${номер по порядку}". Каждый ответ записывается в массив данных
+genres*/
+
+
+function showMyDB(hidden) {
+    if (!hidden) {
+        console.log(personalMovieDB);
+    }
+}
+
+showMyDB(personalMovieDB.privat);
