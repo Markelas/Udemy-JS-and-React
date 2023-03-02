@@ -1,16 +1,6 @@
 'use strict';
 'use moz';
-// let a = prompt('Hi');
-// console.log(a);
 
-
-
-/*const answers = [];
-
-answers[0] = prompt('Как ваше имя?', '');
-answers[1] = prompt('Фамилия?', '');
-answers[2] = prompt('Сколько Вам лет?', '');
-console.log(typeof(answers));*/
 
 
 /* Задание на урок:
